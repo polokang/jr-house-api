@@ -36,6 +36,7 @@ const houseSchema = new mongoose.Schema(
       ref: "User"
     },
     tenant: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    status: { type: ["lease", "leased"], index: true },
 
     __v: { type: Number, select: false },
     createdAt: { type: Date, select: false },

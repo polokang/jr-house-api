@@ -22,12 +22,14 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: Number,
       required: true,
+      unique: true,
       minlength: 10
     },
     email: {
       type: String,
       required: true,
       lowercase: true,
+      unique: true,
       validate: {
         validator: email => !Joi.validate(email, Joi.string().email()).error,
         msg: "Invalid email format"
@@ -52,7 +54,7 @@ const userSchema = new mongoose.Schema(
     },
     age: Number,
     gender: String,
-    role: ["admin", "owner", "tenant"],
+    role: ["admin", "owner", "tenant", "guest"],
     __v: { type: Number, select: false },
     createdAt: { type: Date, select: false },
     updatedAt: { type: Date, select: false }
