@@ -1,0 +1,161 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: JR HOUSE
+  description: This is the api server for HOUSE CMS
+  contact:
+    name: Mason
+    email: mason.xiong@yahoo.com
+servers:
+  - url: /jr
+
+tags:
+  - name: "users"
+    description: "Operations about users"
+  - name: "auth"
+    description: "User authentication"
+
+paths:
+  /users:
+    post:
+      tags:
+        - "users"
+      summary: "Register a new user"
+      description: ""
+      operationId: "addUser"
+      requestBody:
+        description: "Required user fields"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        400:
+          description: "Bad Request"
+        201:
+          description: "Created"
+
+  /auth:
+    post:
+      tags:
+        - "auth"
+      summary: "login user"
+      operationId: "login"
+      requestBody:
+        description: "Required user fields"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Auth"
+      responses:
+        200:
+          description: "successful"
+        400:
+          description: "Invalid username or password"
+  # --------------------------------- houses start -------------------------- #
+  /houses:
+    get:
+      tags:
+        - "houses"
+      summary: "Get all houses"
+      description: "return 10 by default"
+      operationId: "getHouses"
+      parameters:
+        - name: "page"
+          in: "query"
+          description: "Current page number"
+          schema:
+            type: string
+        - name: "pageSize"
+          in: "query"
+          description: "Number of items on each page"
+          schema:
+            type: number
+        - name: "sort"
+          in: "query"
+          description: "how to sort the result"
+          schema:
+            type: string
+        - name: "q"
+          in: "query"
+          description: "search key"
+          schema:
+            type: string
+      responses:
+        200:
+          description: "successful"
+        401:
+          description: "UnAuthorized"
+      security:
+        - Bearer: []
+
+    post:
+      tags:
+        - "house"
+      summary: "Add new house"
+      operationId: "addHouse"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/House"
+      responses:
+        200:
+          description: "created"
+        400:
+          description: "Bad Request"
+        401:
+          description: "UnAuthorized"
+      security:
+        - Bearer: []
+
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: "object"
+      properties:
+        firstName: 
+          type: "string"
+        lastName: 
+          type: "string"
+        fullName: 
+          type: "string"
+        email: 
+          type: "string"
+        password: 
+          type: "string"
+        phone: 
+          type: "string"
+    User:
+      type: "object"
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        emailName:
+          type: "string"
+    House:
+      type: "object"
+      properties:
+        code:
+          type: "string"
+        name:
+          type: "string"
+        description:
+          type: "string"
+    Auth:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+        password:
+          type: "string"

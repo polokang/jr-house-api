@@ -1,10 +1,13 @@
 const express = require("express");
 require("envdotjson").load();
-
+require("express-async-errors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
 
+const swaggerSpec = YAML.load("./swagger/swagger.yaml");
 const routes = require("./routes");
 const { connectToDB } = require("./utils/db");
 const errorHandler = require("./middleware/errorHandler");
@@ -15,6 +18,7 @@ const PORT = process.env.PORT || 3002;
 const morganLvl = process.env.NODE_ENV === "production" ? "short" : "dev";
 const morganLog = morgan(morganLvl, { stream: logger.stream });
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(helmet());
 app.use(cors());
 app.use(morganLog);

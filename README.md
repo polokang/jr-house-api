@@ -27,6 +27,9 @@
 8. `winston-daily-rotate-file` _A transport for winston which logs to a rotating file. Logs can be rotated based on a date, size limit, and old logs can be removed based on count or elapsed days._
 9. `mongoose` _Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment._
 10. `joi` _Object schema description language and validator for JavaScript objects._
+11. `express-async-errors` _This library is about what happens when you hit an error._
+12. `swagger-ui-express` _the Swagger UI bound to your Swagger document. This acts as living documentation for your API hosted from within your app._
+13. `yamljs` _Standalone JavaScript YAML 1.2 Parser & Encoder._
 
 # Steps
 
@@ -55,6 +58,9 @@
 - `npm i winston-daily-rotate-file`
 - `npm i mongoose`
 - `npm i joi`
+- `npm i express-async-errors`
+- `npm i swagger-ui-express`
+- `npm i yamljs`
 
 ## Run
 
