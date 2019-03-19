@@ -21,7 +21,40 @@ async function addHouse(req, res) {
   return formatResponse(res, house, 201);
 }
 
+async function deleteHouse(req, res) {
+  const { address, code, description } = req.body;
+  const house = await houseService.deleteOne({
+    address,
+    description,
+    _id: code
+  });
+  return formatResponse(res, house, 201);
+}
+
+async function updateHouse(req, res) {
+  const { address, code, description } = req.body;
+  const house = await houseService.updateOne({
+    address,
+    description,
+    _id: code
+  });
+  return formatResponse(res, house, 201);
+}
+
+async function readHouse(req, res) {
+  const { address, code, description } = req.body;
+  const house = await houseService.readOne({
+    address,
+    description,
+    _id: code
+  });
+  return formatResponse(res, house, 201);
+}
+
 module.exports = {
   getAllHouses,
-  addHouse
+  addHouse,
+  deleteHouse,
+  updateHouse,
+  readHouse
 };
