@@ -1,5 +1,6 @@
 const express = require("express");
 require("envdotjson").load();
+require("dotenv").config();
 require("express-async-errors");
 const helmet = require("helmet");
 const morgan = require("morgan");
