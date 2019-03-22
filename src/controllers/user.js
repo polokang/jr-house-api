@@ -1,6 +1,6 @@
 const userService = require("../services/user");
 
-const { formatResponse } = require("../utils/helper");
+const { formatResponse, convertQuery,convertUpdateBody} = require("../utils/helper");
 
 async function addUser(req, res) {
   const { firstName, lastName, fullName, email, phone, password } = req.body;
@@ -28,7 +28,7 @@ async function updateUser(req, res) {
   const {id} = req.params;
   const keys = ['phone', 'email'];
   const user = await userService.updateOne(
-    code,
+    id,
     convertUpdateBody(req.body, keys)
   );
   if (!user) {
@@ -39,7 +39,7 @@ async function updateUser(req, res) {
 }
 async function deleteUser(req, res) {
   const { id } = req.params;
-  const user = await userService.deleteOne(code);
+  const user = await userService.deleteOne(id);
   if (!user) {
     return formatResponse(res, 'Course not found', 404);
   }
