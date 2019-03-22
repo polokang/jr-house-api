@@ -15,6 +15,39 @@ async function addUser(req, res) {
   return formatResponse(res, user, 201);
 }
 
+
+async function getAllusers(req,res){
+  const total = await userService.countAll();
+  const { pagination, sort, search } = convertQuery(req.query, total);
+
+  const user = await userService.getAll(pagination, sort, search);
+
+  return formatResponse(res, { data: user, pagination });
+}
+async function updateUser(req, res) {
+  const {id} = req.params;
+  const keys = ['phone', 'email'];
+  const user = await userService.updateOne(
+    code,
+    convertUpdateBody(req.body, keys)
+  );
+  if (!user) {
+    return formatResponse(res, 'Course not found', 404);
+  }
+
+  return formatResponse(res, user);
+}
+async function deleteUser(req, res) {
+  const { id } = req.params;
+  const user = await userService.deleteOne(code);
+  if (!user) {
+    return formatResponse(res, 'Course not found', 404);
+  }
+  return formatResponse(res, user);
+}
 module.exports = {
-  addUser
+  addUser,
+  getAllusers,
+  updateUser,
+  deleteUser
 };

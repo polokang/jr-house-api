@@ -48,3 +48,9 @@ app.get("/", (req, res) => {
 });
 
 // app.listen(3000, () => console.log("listen 3000 port"));
+// const express=require("express");
+// const app =express();
+// app.get("/", (req, res) => {
+//     res.send("welecom to jr！");
+//   });
+//   app.listen(3002, () => console.log("listen 3002 port"));

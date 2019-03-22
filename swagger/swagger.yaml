@@ -134,7 +134,7 @@ components:
           type: "string"
         phone: 
           type: "string"
-    User:
+    User1:
       type: "object"
       properties:
         firstName:
