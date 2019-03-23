@@ -67,4 +67,8 @@ houseSchema.statics.searchQuery = async function(pagination, sort, search) {
     .limit(pageSize);
 };
 
+houseSchema.static.searchAll = async function() {
+  return this.find();
+};
+
 module.exports = mongoose.model("House", houseSchema);
