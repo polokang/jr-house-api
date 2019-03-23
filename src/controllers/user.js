@@ -1,4 +1,5 @@
 const userService = require("../services/user");
+const User=require("../models/user");
 
 const { formatResponse, convertQuery,convertUpdateBody} = require("../utils/helper");
 
@@ -16,13 +17,15 @@ async function addUser(req, res) {
 }
 
 
-async function getAllusers(req,res){
-  const total = await userService.countAll();
-  const { pagination, sort, search } = convertQuery(req.query, total);
+ const getAllusers= async(req,res)=>{
+  // const total = await userService.countAll();
+  // const { pagination, sort, search } = convertQuery(req.query, total);
 
-  const user = await userService.getAll(pagination, sort, search);
+  // const user = await userService.getAll(pagination, sort, search);
 
-  return formatResponse(res, { data: user, pagination });
+  // return formatResponse(res, { data: user, pagination });
+  const user= await User.find();
+  return res.json(user);
 }
 async function updateUser(req, res) {
   const {id} = req.params;

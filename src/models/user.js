@@ -83,6 +83,9 @@ userSchema.virtual("title").get(function() {
     : null;
 });
 
-const User = mongoose.model("User", userSchema);
 
+// userSchema.statics.searchQuery = async function() {
+//   return this.find();
+// };
+const User = mongoose.model("User", userSchema);
 module.exports = User;

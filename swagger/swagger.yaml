@@ -35,6 +35,19 @@ paths:
           description: "Bad Request"
         201:
           description: "Created"
+    get:
+      tags:
+        - 'users'
+      summary: 'Get all users'
+      description: ''
+      operationId: 'getAllUsers'
+      responses:
+        400:
+          description: 'Bad Request'
+        401:
+          description: 'UnAuthorized'
+      security:
+        - Bearer: []
 
   /auth:
     post:
