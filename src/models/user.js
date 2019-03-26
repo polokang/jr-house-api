@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-
+const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema(
   {
     firstName: {
@@ -37,13 +37,7 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
-      validate: {
-        validator: password =>
-          !Joi.validate(password, Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/))
-            .error,
-        msg: "Invalid password format"
-      }
+      required: true
     },
     avatar: {
       type: String,
@@ -83,7 +77,13 @@ userSchema.virtual("title").get(function() {
     : null;
 });
 
-
+userSchema.methods.hashPassword=async function(){
+  this.password=await bcrypt.hash(this.password,10);
+}
+userSchema.methods.validatePassword=async function(password){
+  const validpassword= await bcrypt.compare(password,this.password);
+  return validpassword;
+}
 // userSchema.statics.searchQuery = async function() {
 //   return this.find();
 // };

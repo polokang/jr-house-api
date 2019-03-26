@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.5",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "envdotjson": "^1.2.0",

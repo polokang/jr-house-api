@@ -17,6 +17,7 @@ async function addUser(req, res) {
     phone,
     password
   });
+  
   const token=createjwt(user._id);
   return formatResponse(res, { firstName,lastName,fullName,email,phone,password,token }, 201);
 }
