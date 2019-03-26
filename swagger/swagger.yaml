@@ -16,7 +16,7 @@ tags:
     description: "User authentication"
 
 paths:
-  /users:
+  /users/register:
     post:
       tags:
         - "users"

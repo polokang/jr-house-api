@@ -6,4 +6,4 @@ class UserService extends Service {
         return this.Model.findOne({ email });
       }
 }
-module.exports = new Service(User);
+module.exports = new UserService(User);

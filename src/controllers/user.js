@@ -1,10 +1,14 @@
 const userService = require("../services/user");
 const User=require("../models/user");
-
+const { createjwt } = require('../utils/jwt');
 const { formatResponse, convertQuery,convertUpdateBody} = require("../utils/helper");
 
 async function addUser(req, res) {
   const { firstName, lastName, fullName, email, phone, password } = req.body;
+  const exituser=await userService.getOneByEmail(email);
+  if(exituser){
+    return formatResponse(res, 'Email already exists', 400);
+  }
   const user = await userService.createOne({
     firstName,
     lastName,
@@ -13,7 +17,8 @@ async function addUser(req, res) {
     phone,
     password
   });
-  return formatResponse(res, user, 201);
+  const token=createjwt(user._id);
+  return formatResponse(res, { firstName,lastName,fullName,email,phone,password,token }, 201);
 }
 
 
