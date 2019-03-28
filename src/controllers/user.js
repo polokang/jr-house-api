@@ -1,6 +1,6 @@
 const userService = require("../services/user");
 const User=require("../models/user");
-const { createjwt } = require('../utils/jwt');
+// const { createjwt } = require('../utils/jwt');
 const { formatResponse, convertQuery,convertUpdateBody} = require("../utils/helper");
 
 async function addUser(req, res) {
@@ -17,9 +17,10 @@ async function addUser(req, res) {
     phone,
     password
   });
-  
-  const token=createjwt(user._id);
-  return formatResponse(res, { firstName,lastName,fullName,email,phone,password,token }, 201);
+  // login 的时候才需要给token 这里不需要
+  // const token=createjwt(user._id);
+  // return formatResponse(res, { firstName,lastName,fullName,email,phone,password,token }, 201);
+  return formatResponse(res, { firstName,lastName,fullName,email,phone,password}, 201);
 }
 
 

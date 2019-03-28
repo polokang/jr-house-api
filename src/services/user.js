@@ -11,5 +11,16 @@ class UserService extends Service {
       await document.save();
       return document;
     }
+    async verifyUserPassword(email,password){
+       const user=await this.Model.findOne({email});
+       console.log(user.firstName);
+       const verify= await user.validatePassword(password);
+       if(verify===true){
+         return user;
+       }else{
+         return null;
+       }
+       
+    }
 }
 module.exports = new UserService(User);

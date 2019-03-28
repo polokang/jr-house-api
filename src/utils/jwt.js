@@ -3,7 +3,7 @@ const jwt=require("jsonwebtoken");
 
 const createjwt= id=>{
     const token=jwt.sign({id},process.env.JWT_KEY,{
-        expiresIn:"15m"
+        expiresIn:"20m"
     });
     return token;
 };
