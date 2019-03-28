@@ -36,7 +36,7 @@ async function addUser(req, res) {
 }
 async function updateUser(req, res) {
   const {id} = req.params;
-  const keys = ['phone', 'email'];
+  const keys = ['phone'];
   const user = await userService.updateOne(
     id,
     convertUpdateBody(req.body, keys)

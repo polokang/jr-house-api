@@ -11,6 +11,5 @@ module.exports={
         const token =createjwt(user._id);
         console.log(user);
         return formatResponse(res, { name: user.fullName, token });
-   
     }
 }
