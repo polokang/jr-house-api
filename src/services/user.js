@@ -13,7 +13,6 @@ class UserService extends Service {
     }
     async verifyUserPassword(email,password){
        const user=await this.Model.findOne({email});
-       console.log(user.firstName);
        const verify= await user.validatePassword(password);
        if(verify===true){
          return user;

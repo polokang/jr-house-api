@@ -9,7 +9,6 @@ module.exports={
             return formatResponse(res,"invalid email or password",401);
         }
         const token =createjwt(user._id);
-        console.log(user);
         return formatResponse(res, { name: user.fullName, token });
     }
 }
