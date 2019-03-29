@@ -35,36 +35,28 @@ async function addUser(req, res) {
   return res.json(user);
 }
 async function updatephone(req, res) {
-  // const {id} = req.params;
-  // const keys = ['phone'];
-  // const user = await userService.updateOne(
-  //   id,
-  //   convertUpdateBody(req.body, keys)
-  // );
-  // if (!user) {
-  //   return formatResponse(res, 'Course not found', 404);
-  // }
-
-  // return formatResponse(res, user);
   const {email,phone}=req.params;
   const verfy=await User.find({email:email});
   if(verfy.length==0){
-    return formatResponse(res, 'email not found', 404);
+    return formatResponse(res, 'user not found', 404);
   }
   const user=await User.updateOne({email:email},{phone:phone});
-  // if(FindEmail==0){
-  //   return formatResponse(res, 'email not found', 404);
-  // }
-  
   return formatResponse(res,"success!");
 }
 async function deleteUser(req, res) {
-  const { id } = req.params;
-  const user = await userService.deleteOne(id);
-  if (!user) {
-    return formatResponse(res, 'Course not found', 404);
+  // const { id } = req.params;
+  // const user = await userService.deleteOne(id);
+  // if (!user) {
+  //   return formatResponse(res, 'Course not found', 404);
+  // }
+  // return formatResponse(res, user);
+  const{email}=req.params;
+  const verfy=await User.find({email:email});
+  if(verfy.length==0){
+    return formatResponse(res, 'user not found', 404);
   }
-  return formatResponse(res, user);
+  const user= await User.remove({email:email});
+  return formatResponse(res,"success");
 }
 module.exports = {
   addUser,
