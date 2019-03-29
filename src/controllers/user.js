@@ -47,10 +47,15 @@ async function updatephone(req, res) {
 
   // return formatResponse(res, user);
   const {email,phone}=req.params;
-  const user=await User.updateOne({email:email},{phone:phone});;
+  const verfy=await User.find({email:email});
+  if(verfy.length==0){
+    return formatResponse(res, 'email not found', 404);
+  }
+  const user=await User.updateOne({email:email},{phone:phone});
   // if(FindEmail==0){
   //   return formatResponse(res, 'email not found', 404);
   // }
+  
   return formatResponse(res,user);
 }
 async function deleteUser(req, res) {
