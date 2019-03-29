@@ -21,5 +21,6 @@ class UserService extends Service {
        }
        
     }
+    
 }
 module.exports = new UserService(User);

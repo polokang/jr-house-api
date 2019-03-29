@@ -34,18 +34,24 @@ async function addUser(req, res) {
   const user= await User.find();
   return res.json(user);
 }
-async function updateUser(req, res) {
-  const {id} = req.params;
-  const keys = ['phone'];
-  const user = await userService.updateOne(
-    id,
-    convertUpdateBody(req.body, keys)
-  );
-  if (!user) {
-    return formatResponse(res, 'Course not found', 404);
-  }
+async function updatephone(req, res) {
+  // const {id} = req.params;
+  // const keys = ['phone'];
+  // const user = await userService.updateOne(
+  //   id,
+  //   convertUpdateBody(req.body, keys)
+  // );
+  // if (!user) {
+  //   return formatResponse(res, 'Course not found', 404);
+  // }
 
-  return formatResponse(res, user);
+  // return formatResponse(res, user);
+  const {email,phone}=req.params;
+  const user=await User.updateOne({email:email},{phone:phone});;
+  // if(FindEmail==0){
+  //   return formatResponse(res, 'email not found', 404);
+  // }
+  return formatResponse(res,user);
 }
 async function deleteUser(req, res) {
   const { id } = req.params;
@@ -58,6 +64,6 @@ async function deleteUser(req, res) {
 module.exports = {
   addUser,
   getAllusers,
-  updateUser,
+  updatephone,
   deleteUser
 };
