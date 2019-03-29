@@ -56,7 +56,7 @@ async function updatephone(req, res) {
   //   return formatResponse(res, 'email not found', 404);
   // }
   
-  return formatResponse(res,user);
+  return formatResponse(res,"success!");
 }
 async function deleteUser(req, res) {
   const { id } = req.params;
