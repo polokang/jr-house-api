@@ -44,12 +44,6 @@ async function updatephone(req, res) {
   return formatResponse(res,"success!");
 }
 async function deleteUser(req, res) {
-  // const { id } = req.params;
-  // const user = await userService.deleteOne(id);
-  // if (!user) {
-  //   return formatResponse(res, 'Course not found', 404);
-  // }
-  // return formatResponse(res, user);
   const{email}=req.params;
   const verfy=await User.find({email:email});
   if(verfy.length==0){
