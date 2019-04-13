@@ -3,6 +3,6 @@ const{login}= require('../controllers/auth');
 const loginAuth=require("../middleware/loginAuth");
 const router=express.Router();
 
-router.post('/',loginAuth,login);
+router.post('/:email/:password',loginAuth,login);
 
 module.exports=router;
