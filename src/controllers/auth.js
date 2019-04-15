@@ -7,7 +7,7 @@ module.exports={
         // body 是在 swagger 主体里面写的
         // const {email,password}=req.body;
         // 用parms 从url 中获取 方便react 取值
-        const {email,password}=req.params;
+        const {email,password}=req.body;
         const user=await userserveice.verifyUserPassword(email,password);
         if(!user){
             return formatResponse(res,"invalid email or password",401);
