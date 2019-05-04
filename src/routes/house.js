@@ -1,10 +1,11 @@
-const router = require("express").Router();
-const { getAllHouses, addHouse } = require("../controllers/house");
+const router = require("express").Router()
+const { getAllHouses, addHouse } = require("../controllers/house")
 
-router.get("/", (req, res) => {
-  res.send("welecom to get house function!!");
-});
+// router.get("/", (req, res) => {
+//   res.send("welecom to get house function!!")
+// })
 
-router.post("/", addHouse);
+router.post("/", addHouse)
+router.get("/", getAllHouses)
 
-module.exports = router;
+module.exports = router

@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Joi = require("joi");
+const mongoose = require("mongoose")
+const Joi = require("joi")
 
 const addressSchema = new mongoose.Schema(
   {
@@ -8,7 +8,7 @@ const addressSchema = new mongoose.Schema(
     postcode: Number
   },
   { _id: false }
-);
+)
 
 const houseSchema = new mongoose.Schema(
   {
@@ -52,19 +52,23 @@ const houseSchema = new mongoose.Schema(
     },
     id: false
   }
-);
+)
 
 //find this house owner has
 houseSchema.methods.countSameOwner = async function() {
-  return this.model("House").find({});
-};
+  return this.model("House").find({})
+}
+
+houseSchema.static.searchAll = async function() {
+  return this.find()
+}
 
 houseSchema.statics.searchQuery = async function(pagination, sort, search) {
-  const { page, pageSize } = pagination;
+  const { page, pageSize } = pagination
   return this.find({ _id: { $regex: search, $options: "i" } })
     .sort(sort)
     .skip((page - 1) * pageSize)
-    .limit(pageSize);
-};
+    .limit(pageSize)
+}
 
-module.exports = mongoose.model("House", houseSchema);
+module.exports = mongoose.model("House", houseSchema)

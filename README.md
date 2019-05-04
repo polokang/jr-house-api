@@ -12,8 +12,22 @@
 # API
 
 1. Add a house info: [post] /houses/
-2. Get all house info: [get] /houses/
+2. Get all house info: [get] /houses/ http://localhost:3002/jr/houses
 3. Get a house info: [get] /houses/:code
+
+###Owner
+
+- add owner: [post] /owner http://127.0.0.1:3002/jr/owner
+
+```
+{
+	"firstName":"zhou",
+	"lastName":"kang",
+	"fullName":"zhouhengk",
+	"email":"cadb@gmail.com",
+	"phone":"0426628645"
+}
+```
 
 # Dependencies:
 
@@ -64,10 +78,22 @@
 
 ## Run
 
-> `npm run dev` for run local server
-
 > `mongod` for run local mongoDB
+> `npm run dev` for run local server
 
 # issue
 
 1. `process.env.PWD` can not get value in vscode debug mode. so need to change the logDirectory path in src/utils/logger.js.
+
+2. How to add owner feather?
+
+- add models/owner.js
+- add services/owner.js
+- add controllers/owner.js
+- add routes/owner.js
+- add `ownerRoute` in ./routes.js
+
+3. fix upload file size limit.
+
+- `"request entity too large" PayloadTooLargeError: request entity too large`
+- `app.use(express.json({ limit: "50mb" }))` in server.js
