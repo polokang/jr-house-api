@@ -1,20 +1,29 @@
-const userService = require("../services/user");
-
-const { formatResponse } = require("../utils/helper");
+const userService = require("../services/user")
+const { formatResponse } = require("../utils/helper")
+const { generateToken } = require("../utils/jwt")
 
 async function addUser(req, res) {
-  const { firstName, lastName, fullName, email, phone, password } = req.body;
+  const { email, password, name } = req.body
+  const existingUser = await userService.getOneByField({ email })
+  if (existingUser) {
+    return formatResponse(res, "Email already exists", 400)
+  }
+
   const user = await userService.createOne({
-    firstName,
-    lastName,
-    fullName,
     email,
-    phone,
-    password
-  });
-  return formatResponse(res, user, 201);
+    password,
+    name
+  })
+  const token = generateToken(user._id)
+  return formatResponse(res, { email, name, token }, 201)
+}
+
+async function getSelf(req, res) {
+  const user = await userService.getOne(req.user.id)
+  return formatResponse(res, user)
 }
 
 module.exports = {
-  addUser
-};
+  addUser,
+  getSelf
+}

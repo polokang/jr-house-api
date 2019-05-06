@@ -1,10 +1,15 @@
-const router = require("express").Router();
-const { addUser } = require("../controllers/user");
+const router = require("express").Router()
+const { addUser } = require("../controllers/user")
 
 router.get("/", (req, res) => {
-  res.send("welecom to get user function!!");
-});
+  res.send("welecom to get user function!!")
+})
 
-router.post("/", addUser);
+router.post("/", addUser)
 
-module.exports = router;
+// router.post("/", (req, res) => {
+//   console.log(req.body)
+//   res.send("============>")
+// })
+
+module.exports = router

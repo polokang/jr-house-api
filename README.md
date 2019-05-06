@@ -44,6 +44,8 @@
 11. `express-async-errors` _This library is about what happens when you hit an error._
 12. `swagger-ui-express` _the Swagger UI bound to your Swagger document. This acts as living documentation for your API hosted from within your app._
 13. `yamljs` _Standalone JavaScript YAML 1.2 Parser & Encoder._
+14. `bcrypt` _This library help you hash passwords._
+15. `jsonwebtoken` _This was developed against draft-ietf-oauth-json-web-token-08._
 
 # Steps
 
@@ -75,6 +77,8 @@
 - `npm i express-async-errors`
 - `npm i swagger-ui-express`
 - `npm i yamljs`
+- `npm i bcrypt`
+- `npm i jsonwebtoken`
 
 ## Run
 
