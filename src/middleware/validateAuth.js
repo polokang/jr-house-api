@@ -1,42 +1,23 @@
-const joi=require("joi");
-const {formatResponse}=require("../utils/helper");
-function validation(req){
-    const schema={
-        firstName:
-        joi
-        .string()
-        .required(),
-        lastName:
-        joi
-        .string()
-        .required(),
-        fullName:
-        joi
-        .string()
-        .required(),
-        email: 
-        joi
-        .string()
-        .required()
-        .email(),
-        phone:
-        joi
-        .number()
-        .required(),
-        password:
-        joi
-        .string()
-        .min(8)
-        .required()     
-    };
-    return joi.validate(req,schema);
+const Joi = require("joi")
+const { formatResponse } = require("../utils/helper")
+
+function validate(req) {
+  const schema = {
+    email: Joi.string()
+      .required()
+      .email(),
+    password: Joi.string()
+      .min(3)
+      .required(),
+    name: Joi.string().optional()
+  }
+
+  return Joi.validate(req, schema)
 }
-module.exports=(req,res,next)=>{
-  const{error}=validation(req.body);
-   if(error){
-    return formatResponse(res, error.details[0].message, 400);
-     
+module.exports = (req, res, next) => {
+  const { error } = validate(req.body)
+  if (error) {
+    return formatResponse(res, error.details[0].message, 400)
+  }
+  return next()
 }
-    return next();
-  
-};

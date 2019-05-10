@@ -1,26 +1,25 @@
-const User = require("../models/user");
-const Service = require("./service");
+const User = require("../models/user")
+const Service = require("./service")
 
 class UserService extends Service {
-    async getOneByEmail(email) {
-        return this.Model.findOne({ email });
-      }
-    async createOne(fields){
-      const document=new this.Model(fields);
-      await document.hashPassword();
-      await document.save();
-      return document;
+  async createOne(fields) {
+    const document = new this.Model(fields)
+    await document.hashPassword()
+    await document.save()
+    return document
+  }
+
+  async getOneByField(field) {
+    return this.Model.findOne(field)
+  }
+
+  async validateUser(email, password) {
+    const user = await this.Model.findOne({ email }).select("password")
+    if (user === null) {
+      return null
     }
-    async verifyUserPassword(email,password){
-       const user=await this.Model.findOne({email});
-       const verify= await user.validatePassword(password);
-       if(verify===true){
-         return user;
-       }else{
-         return null;
-       }
-       
-    }
-    
+    const validPassword = await user.validatePassword(password)
+    return validPassword ? user : null
+  }
 }
-module.exports = new UserService(User);
+module.exports = new UserService(User)

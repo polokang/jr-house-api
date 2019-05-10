@@ -1,26 +1,25 @@
-const userService = require("../services/user");
-const User=require("../models/user");
-// const { createjwt } = require('../utils/jwt');
-const { formatResponse, convertQuery,convertUpdateBody} = require("../utils/helper");
+const userService = require("../services/user")
+const { formatResponse } = require("../utils/helper")
+const { generateToken } = require("../utils/jwt")
 
 async function addUser(req, res) {
-  const { firstName, lastName, fullName, email, phone, password } = req.body;
-  const exituser=await userService.getOneByEmail(email);
-  if(exituser){
-    return formatResponse(res, 'Email already exists', 400);
+  const { email, password, name } = req.body.user
+  const existingUser = await userService.getOneByField({ email })
+  if (existingUser) {
+    return formatResponse(res, "Email already exists", 400)
   }
   const user = await userService.createOne({
-    firstName,
-    lastName,
-    fullName,
     email,
-    phone,
-    password
-  });
-  // login 的时候才需要给token 这里不需要
-  // const token=createjwt(user._id);
-  // return formatResponse(res, { firstName,lastName,fullName,email,phone,password,token }, 201);
-  return formatResponse(res, { firstName,lastName,fullName,email,phone,password}, 201);
+    password,
+    name
+  })
+  const token = generateToken(user._id)
+  return formatResponse(res, { email, name, token }, 201)
+}
+
+async function getSelf(req, res) {
+  const user = await userService.getOne(req.user.id)
+  return formatResponse(res, user)
 }
 
 
@@ -54,7 +53,5 @@ async function deleteUser(req, res) {
 }
 module.exports = {
   addUser,
-  getAllusers,
-  updatephone,
-  deleteUser
-};
+  getSelf
+}
