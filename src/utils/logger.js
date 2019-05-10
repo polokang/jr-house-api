@@ -5,13 +5,13 @@ const path = require("path");
 const fs = require("fs");
 
 const env = process.env.NODE_ENV;
-const logDirectory = path.join(process.env.PWD, "logs");
-const errorDirectory = path.join(logDirectory, "errors");
+// const logDirectory = path.join(process.env.PWD, "logs");
+// const errorDirectory = path.join(logDirectory, "errors");
 
 // eslint-disable-next-line no-unused-expressions
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+// fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 // eslint-disable-next-line no-unused-expressions
-fs.existsSync(errorDirectory) || fs.mkdirSync(errorDirectory);
+// fs.existsSync(errorDirectory) || fs.mkdirSync(errorDirectory);
 
 const logFile = new transports.DailyRotateFile({
   dirname: "logs",

@@ -19,6 +19,23 @@ function extractS3FolderName(baseUrl) {
   const array = baseUrl.split("/")
   return array[array.length - 1]
 }
+function convertUpdateBody(body, keys) {
+  const newBody = {};
+  keys.forEach(k => {
+    if (body[k]) {
+      newBody[k] = body[k];
+    }
+  });
+  return newBody;
+}
+
+function convertQuery(query, total) {
+  const pagination = convertPagination(query, total);
+  const sort = convertSortQuery(query.sort);
+  const search = query.q;
+  return { pagination, sort, search };
+}
+
 
 module.exports = {
   formatResponse,
