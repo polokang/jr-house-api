@@ -3,7 +3,7 @@ const { formatResponse } = require("../utils/helper")
 const { generateToken } = require("../utils/jwt")
 
 async function addUser(req, res) {
-  const { email, password, name } = req.body
+  const { email, password, name } = req.body.user
   const existingUser = await userService.getOneByField({ email })
   if (existingUser) {
     return formatResponse(res, "Email already exists", 400)

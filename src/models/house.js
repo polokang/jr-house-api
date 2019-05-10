@@ -18,11 +18,23 @@ const houseSchema = new mongoose.Schema(
       alias: "code"
     },
     address: addressSchema,
+    bedroom: {
+      type: Number,
+      default: 0
+    },
+    bathroom: {
+      type: Number,
+      default: 0
+    },
+    carpark: {
+      type: Number,
+      default: 0
+    },
     description: {
       type: String,
       default: ""
     },
-    image: {
+    picture: {
       type: String,
       validate: {
         // validator.js
@@ -33,9 +45,9 @@ const houseSchema = new mongoose.Schema(
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: "Owner"
     },
-    tenant: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    tenant: [{ type: mongoose.Schema.Types.ObjectId, ref: "Owner" }],
     status: { type: ["lease", "leased"], index: true },
 
     __v: { type: Number, select: false },
